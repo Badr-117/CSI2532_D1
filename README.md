@@ -32,30 +32,65 @@ c)
 
 ## B2. [15 points] Writing SQL Queries
 a)
-'''
+```
 SELECT name FROM users WHERE join_date < '2020-01-01'
-'''
+```
 
 b)
-'''
+```
 SELECT COUNT(software_name), name FROM licenses 
 JOIN users ON users.id = user_id
 GROUP BY name
 ORDER BY count DESC
-'''
+```
 
 c)
-'''
+```
 INSERT INTO licenses (user_id, software_name, access_code)
 VALUES
  (50, 'Nord VPN', 'abc127'),
  (49, 'Android studio', 'def459'),
  (50, 'Eclips', 'hij779')
-'''
+```
 
 d)
-'''
+```
 UPDATE softwares
 SET version = '51'
 WHERE name = 'Sketch';
-'''
+```
+## B3. [30 marks] Updating SQL Schemas
+a)
+```
+a)	ALTER TABLE licenses
+ADD software_version varchar(100);
+
+```
+
+b)
+```
+ALTER TABLE softwares
+DROP CONSTRAINT softwares_pkey;
+
+ALTER TABLE softwares
+ADD CONSTRAINT PK_softwares PRIMARY KEY (name,version);
+
+```
+
+c)
+```
+ALTER TABLE licenses
+DROP CONSTRAINT licenses_pkey;
+
+ALTER TABLE licenses
+ADD CONSTRAINT PK_licenses PRIMARY KEY (user_id,software_name,software_version);
+
+```
+
+d)
+```
+UPDATE licenses
+SET access_code = '1monthfree'
+WHERE software_name = 'Sketch' AND software_version != '52'
+
+```
